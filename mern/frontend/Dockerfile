@@ -1,8 +1,5 @@
-# Use the official image as a parent image
-# Description: Dockerfile for the client side of the MERN stack application
-
-# Use the official image as a parent image
-FROM node:18.9.1
+# Use slim base image to reduce size (~100MB smaller)
+FROM node:18.9.1-slim
 
 # Set the working directory
 WORKDIR /app
