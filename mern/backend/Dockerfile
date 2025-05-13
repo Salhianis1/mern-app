@@ -1,4 +1,5 @@
-FROM node:18.9.1
+# Use slim base image to reduce size (~100MB smaller)
+FROM node:18.9.1-slim
 
 WORKDIR /app
 
