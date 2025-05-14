@@ -1,20 +1,32 @@
-# Use slim base image to reduce size (~100MB smaller)
-FROM node:18.9.1-slim
 
-# Set the working directory
+FROM node:18.9.1-slim AS builder
+
+
+RUN apt-get update && apt-get install -y \
+     python3 make g++ \
+  && rm -rf /var/lib/apt/lists/*
+
+
 WORKDIR /app
 
-# Copy the file from your host to your current location
-COPY package.json .
 
-# Run the command inside your image filesystem
-RUN npm install --force
+COPY package*.json ./
 
-# Inform Docker that the container is listening on the specified port at runtime
-EXPOSE 5173
+RUN npm ci --force
 
-# Copy the rest of your app's source code from your host to your image filesystem
+
 COPY . .
+RUN npm run build
 
-# Run the specified command within the container
-CMD ["npm", "run", "dev"]
+
+FROM nginx:alpine
+
+
+RUN rm -rf /usr/share/nginx/html/*
+
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
