@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        GIT_REPO_URL = 'https://github.com/Salhianis1/mern-app.git'
+        GIT_REPO_URL = 'https://github.com/Salhianis1/MERN-Frontend-Backend-docker-compose.git'
         GIT_BRANCH = 'main'
         SONARQUBE_ENV = 'SonarQube'
         SONAR_PROJECT_KEY = 'MERN-App'
@@ -94,3 +94,4 @@ pipeline {
         }
     } // closes stages
 } // closes pipeline
+
