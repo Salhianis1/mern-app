@@ -72,8 +72,8 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-id', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         sh """
                             echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                            docker push ${DOCKERHUB_USERNAME}/frontend
-                            docker push ${DOCKERHUB_USERNAME}/backend
+                            docker push ${DOCKERHUB_USERNAME}/mern-frontend
+                            docker push ${DOCKERHUB_USERNAME}/mern-backend
                             docker logout
                         """
                     }
